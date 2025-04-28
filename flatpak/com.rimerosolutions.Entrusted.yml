@@ -6,7 +6,6 @@ sdk: org.gnome.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
   - org.freedesktop.Sdk.Extension.llvm20
-
 command: entrusted
 finish-args:
   - --socket=wayland
@@ -14,11 +13,51 @@ finish-args:
   - --device=dri
   - --share=ipc
   - --env=FLATPAK=1
-
 build-options:
   append-path: /usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/llvm20/bin
   prepend-ld-library-path: "/usr/lib/sdk/llvm20/lib:/app/lib64:/app/lib"
 modules:
+  - name: gmp
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz
+        sha256: fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2
+    config-opts:
+      - --enable-static
+      - --disable-shared
+  - name: mpfr
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.0.tar.xz
+        sha256: 06a378df13501248c1b2db5aa977a2c8126ae849a9d9b7be2546fb4a9c26d993
+    config-opts:
+      - --enable-static
+      - --disable-shared
+  - name: mpc
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz
+        sha256: ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8
+    config-opts:
+      - --enable-static
+      - --disable-shared
+  - name: libstdc++
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://ftp.gnu.org/gnu/gcc/gcc-15.1.0/gcc-15.1.0.tar.xz
+        sha256: e2b09ec21660f01fecffb715e0120265216943f038d0e48a9868713e54f06cea
+    config-opts:      
+      - --enable-static
+      - --disable-shared
+      - --disable-multilib
+      - --enable-languages=c,c++
+      - --with-gmp=/app 
+      - --with-mpc=/app/lib 
+      - --with-mpfr=/app/lib 
   - name: libpango-1.0
     buildsystem: meson
     sources:
@@ -42,9 +81,9 @@ modules:
         LC_ALL: C.utf8
     build-commands:
       - ls /run/build
-      - cargo --offline fetch --manifest-path /run/build/fltk-rs-flatpak/app/Cargo.toml --verbose
+      - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
-      - cargo --offline build --manifest-path /run/build/fltk-rs-flatpak/Cargo.toml --features gui,fltk/fltk-bundled
+      - RUSTFLAGS="-L /app/lib -L /app/lib64" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml 
       - install -Dm644 -t /app/share/metainfo/com.rimerosolutions.Entrusted.metainfo.xml flatpak/com.rimerosolutions.Entrusted.metainfo.xml
       - install -Dm644 -t /app/share/applications/com.rimerosolutions.Entrusted.desktop assets/com.rimerosolutions.Entrusted.desktop 
       - install -Dm755 -t /app/bin app/entrusted/target/release/entrusted
