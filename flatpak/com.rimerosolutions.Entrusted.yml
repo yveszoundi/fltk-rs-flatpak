@@ -1,0 +1,55 @@
+id: com.rimerosolutions.Entrusted
+
+runtime: org.gnome.Platform
+runtime-version: "48"
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+  - org.freedesktop.Sdk.Extension.llvm20
+
+command: entrusted
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --share=ipc
+  - --env=FLATPAK=1
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/llvm20/bin
+  prepend-ld-library-path: "/usr/lib/sdk/llvm20/lib:/app/lib64:/app/lib"
+modules:
+  - name: libpango-1.0
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/pango/1.56/pango-1.56.3.tar.xz
+        sha256: 2606252bc25cd8d24e1b7f7e92c3a272b37acd6734347b73b47a482834ba2491
+    config-opts:
+      - -Dxft=enabled
+      - -Dfreetype=enabled
+  - name: entrusted
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://github.com/yveszoundi/entrusted
+        branch: main
+      - cargo-sources.json
+    build-options:
+      env:
+        CARGO_HOME: /run/build/entrusted/cargo
+        XDG_CACHE_HOME: /run/build/entrusted/cache
+        LC_ALL: C.utf8
+    build-commands:
+      - cargo --offline fetch --manifest-path /run/build/entrusted/entrusted/app/Cargo.toml --verbose
+      - source /usr/lib/sdk/llvm20/enable.sh
+      - cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features gui,fltk/fltk-bundled
+      - install -Dm644 -t /app/share/metainfo/com.rimerosolutions.Entrusted.metainfo.xml flatpak/com.rimerosolutions.Entrusted.metainfo.xml
+      - install -Dm644 -t /app/share/applications/com.rimerosolutions.Entrusted.desktop assets/com.rimerosolutions.Entrusted.desktop 
+      - install -Dm755 -t /app/bin app/entrusted/target/release/entrusted
+      - install -Dm644 flatpak/icon-32x32.png /app/share/icons/hicolor/32x32/apps/com.rimerosolutions.Entrusted.png
+      - install -Dm644 flatpak/icon-128x128.png /app/share/icons/hicolor/128x128/apps/com.rimerosolutions.Entrusted.png
+      - install -Dm644 flatpak/icon-256x256.png /app/share/icons/hicolor/256x256/apps/com.rimerosolutions.Entrusted.png
+      - install -Dm644 flatpak/icon-512x512.png /app/share/icons/hicolor/256x256@2/apps/com.rimerosolutions.Entrusted.png
+    post-install:
+      - install -Dm644 LICENSE /app/share/licenses/com.rimerosolutions.Entrusted/LICENSE
