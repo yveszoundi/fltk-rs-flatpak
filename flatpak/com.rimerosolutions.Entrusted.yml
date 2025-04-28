@@ -26,6 +26,7 @@ modules:
     config-opts:
       - --enable-static
       - --disable-shared
+      - CFLAGS=-fPIC
   - name: mpfr
     buildsystem: autotools
     sources:
@@ -35,6 +36,7 @@ modules:
     config-opts:
       - --enable-static
       - --disable-shared
+      - CFLAGS=-fPIC
   - name: mpc
     buildsystem: autotools
     sources:
@@ -44,6 +46,7 @@ modules:
     config-opts:
       - --enable-static
       - --disable-shared
+      - CFLAGS=-fPIC
   - name: libstdc++
     buildsystem: autotools
     sources:
@@ -55,9 +58,6 @@ modules:
       - --disable-shared
       - --disable-multilib
       - --enable-languages=c,c++
-      - --with-gmp=/app 
-      - --with-mpc=/app/lib 
-      - --with-mpfr=/app/lib 
   - name: libpango-1.0
     buildsystem: meson
     sources:
