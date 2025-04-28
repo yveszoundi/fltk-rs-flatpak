@@ -41,6 +41,7 @@ modules:
         XDG_CACHE_HOME: /run/build/entrusted/cache
         LC_ALL: C.utf8
     build-commands:
+      - ls /run/build
       - cargo --offline fetch --manifest-path /run/build/fltk-rs-flatpak/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
       - cargo --offline build --manifest-path /run/build/fltk-rs-flatpak/Cargo.toml --features gui,fltk/fltk-bundled
