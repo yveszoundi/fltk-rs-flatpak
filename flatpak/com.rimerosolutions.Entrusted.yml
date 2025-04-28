@@ -32,7 +32,7 @@ modules:
     buildsystem: simple
     sources:
       - type: git
-        url: https://github.com/yveszoundi/entrusted
+        url: https://github.com/yveszoundi/fltk-rs-flatpak
         branch: main
       - cargo-sources.json
     build-options:
