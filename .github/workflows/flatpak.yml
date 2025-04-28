@@ -7,14 +7,14 @@ jobs:
   flatpak:
     name: "Flatpak"
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-48
-      options: --privileged
     steps:
+    - name: prepare
+      shell: bash
+      run: |
+        sudo apt update && sudo apt -y install flatpak flatpak-builder        
     - uses: actions/checkout@v4
-    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
-      with:
-        bundle: palette.flatpak
-        manifest-path: ${{ github.workspace }}/flatpak/com.rimerosolutions.Entrusted.yml
-        cache-key: flatpak-builder-${{ github.sha }}
+    - name: build-flatpak
+      shell: bash
+      run: |
+        flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir flatpak/com.rimerosolutions.Entrusted.yml
 
