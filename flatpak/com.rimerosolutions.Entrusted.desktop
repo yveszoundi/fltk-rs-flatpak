@@ -1,11 +1,10 @@
 [Desktop Entry]
-Version=0.1.0
 Type=Application
 
 Name=entrusted
 Comment=Convert suspicious documents to trusted PDFs
 Icon=com.rimerosolutions.Entrusted
 Terminal=false
-Categories=Graphics;Office;
+Categories=Office;
 Keywords=sanitizer;ocr;pdf;
 Exec=entrusted
