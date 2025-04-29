@@ -62,6 +62,7 @@ modules:
       - --with-mpc=/app 
       - --with-mpfr=/app 
       - --with-gmp=/app 
+      - CFLAGS=-fPIE
   - name: libpango-1.0
     buildsystem: meson
     sources:
