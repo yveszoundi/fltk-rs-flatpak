@@ -4,8 +4,8 @@
   <name>entrusted</name>
   <summary>Sanitize documents for active content removal.</summary>
   <developer_name>Yves Zoundi</developer_name>
-  <metadata_license>GPL-3.0-only</metadata_license>
-  <project_license>GPL-3.0-only</project_license>
+  <metadata_license>GPL-3+</metadata_license>
+  <project_license>GPL-3+</project_license>
   <url type="homepage">https://github.com/rimerosolutions/entrusted</url>
   <url type="bugtracker">https://github.com/rimerosolutions/entrusted/issues</url>
   <description>
