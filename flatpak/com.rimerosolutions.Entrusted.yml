@@ -51,13 +51,14 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://ftp.gnu.org/gnu/gcc/gcc-15.1.0/gcc-15.1.0.tar.xz
+        url: https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz
         sha256: e2b09ec21660f01fecffb715e0120265216943f038d0e48a9868713e54f06cea
     config-opts:      
       - --enable-static
       - --disable-shared
       - --disable-multilib
       - --enable-languages=c,c++
+      - --disable-bootstrap
       - --with-mpc=/app 
       - --with-mpfr=/app 
       - --with-gmp=/app 
