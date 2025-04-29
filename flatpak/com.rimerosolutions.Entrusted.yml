@@ -58,9 +58,9 @@ modules:
       - --disable-shared
       - --disable-multilib
       - --enable-languages=c,c++
-      - --with-mpc=/app/lib 
-      - --with-mpfr=/app/lib 
-      - --with-gmp=/app/lib 
+      - --with-mpc=/app 
+      - --with-mpfr=/app 
+      - --with-gmp=/app 
   - name: libpango-1.0
     buildsystem: meson
     sources:
