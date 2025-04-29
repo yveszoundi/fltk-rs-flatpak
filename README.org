@@ -3,8 +3,8 @@
 [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml/badge.svg]]
 
 
-*Note*:
-Do whatever you want with this code, the license file in this repository is just for testing purpose with Flatpak.
+*NOTE*:
+Do whatever you want with this code, the license file in this repository is just for testing purposes with Flatpak.
 
 
 * What is this?
@@ -42,7 +42,7 @@ This is an example on Ubuntu, but that doesn't matter much.
 Get [[https://github.com/flatpak/flatpak-builder-tools][flatpak-builder-tools]] from GitHub (git clone first).
 
 #+begin_src sh
-  git clone https://github.com/flatpak/flatpak-builder-tools
+  cd ~/ && git clone https://github.com/flatpak/flatpak-builder-tools
 #+end_src
 
 Install the required python dependencies
@@ -51,8 +51,8 @@ Install the required python dependencies
   sudo apt install python3-aiohttp python3-toml
 #+end_src
 
-#+begin_src  sh
-  ../../../flatpak-builder-tools/cargo/flatpak-cargo-generator.py -o cargo-sources.json Cargo.lock
+#+begin_src sh
+  ~/flatpak-builder-tools/cargo/flatpak-cargo-generator.py -o cargo-sources.json Cargo.lock
 #+end_src
 
 ** Fixing cryptic errors with the linter
