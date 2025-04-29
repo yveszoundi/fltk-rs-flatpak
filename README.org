@@ -2,6 +2,11 @@
 
 [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml/badge.svg]]
 
+
+*Note*:
+Do whatever you want with this code, the license file in this repository is just for testing purpose with Flatpak.
+
+
 * What is this?
 
 This is a simple proof of concept for packaging [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] applications with [[https://flatpak.org/][Flatpak]].
