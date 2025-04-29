@@ -88,7 +88,7 @@ modules:
       - ls /run/build
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
-      - RUSTFLAGS="-L /app/lib -L /app/lib64" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml 
+      - RUSTFLAGS="-L /app/lib -L /app/lib64 -C-link-args=-fPIE" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml 
       - install -Dm644 -t /app/share/metainfo/com.rimerosolutions.Entrusted.metainfo.xml flatpak/com.rimerosolutions.Entrusted.metainfo.xml
       - install -Dm644 -t /app/share/applications/com.rimerosolutions.Entrusted.desktop assets/com.rimerosolutions.Entrusted.desktop 
       - install -Dm755 -t /app/bin app/entrusted/target/release/entrusted
