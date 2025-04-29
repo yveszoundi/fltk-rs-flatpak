@@ -1,0 +1,79 @@
+#+TITLE: Packaging an app built with fltk-rs
+
+[[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml/badge.svg]]
+
+* What is this?
+
+This is a simple proof of concept for packaging [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] applications with [[https://flatpak.org/][Flatpak]].
+
+* How was this tested?
+- I only tested the build aspect so far on GitHub actions, due to build times
+- On a reasonable computer, this should take ~30 mins to build the Flatpak
+
+* What was challenging?
+- [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] requires compilation of some C libraries, that need GCC static libraries (e.g., =libsupc++=)
+- It's difficult to troubleshoot errors without a [[https://github.com/flathub-infra/flatpak-builder-lint][linter]] (vague messages), and that slows down development agility
+- It doesn't look like there are Flatpak applications out there that use =fltk-rs=
+
+* What was helpful?
+
+** Having an easy Flatpak setup
+
+This is an example on Ubuntu, but that doesn't matter much.
+
+#+begin_src sh
+  sudo apt -y install flatpak-builder flatpak
+  flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#+end_src
+
+** Being able to install automatically Sdk extensions during builds
+
+#+begin_src sh
+  flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir flatpak/com.rimerosolutions.Entrusted.yml
+#+end_src
+
+** Generating cargo source for the offline build
+
+Get [[https://github.com/flatpak/flatpak-builder-tools][flatpak-builder-tools]] from GitHub (git clone first).
+
+#+begin_src sh
+  git clone https://github.com/flatpak/flatpak-builder-tools
+#+end_src
+
+Install the required python dependencies
+
+#+begin_src sh
+  sudo apt install python3-aiohttp python3-toml
+#+end_src
+
+#+begin_src  sh
+  ../../../flatpak-builder-tools/cargo/flatpak-cargo-generator.py -o cargo-sources.json Cargo.lock
+#+end_src
+
+** Fixing cryptic errors with the linter
+
+Install the [[https://github.com/flathub-infra/flatpak-builder-lint][linter]] first!
+
+#+begin_src sh
+  flatpak install flathub -y org.flatpak.Builder
+#+end_src
+
+*** Lint the metainfo file
+
+#+begin_src sh
+  flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream flatpak/com.rimerosolutions.Entrusted.metainfo.xml
+#+end_src
+
+*** Lint the desktop file
+
+#+begin_src sh
+  flatpak run --command=desktop-file-validate org.flatpak.Builder flatpak/com.rimerosolutions.Entrusted.desktop
+#+end_src
+
+
+* References
+
+- [[https://docs.flatpak.org/en/latest/getting-started.html][Flatpak documentation (docs.flatpak.org)]]
+- [[https://github.com/flathub-infra/flatpak-builder-lint][Flatpak artifacts linter (flatpak-builder-lint)]]
+- [[https://discourse.flathub.org/][Flathub discourse forum (discourse.flathub.org)]]
+- [[https://fltk-rs.github.io/fltk-rs/][Rust bindings for the FLTK GUI library (fltk-rs)]]
