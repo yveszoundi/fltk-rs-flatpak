@@ -82,8 +82,6 @@ modules:
         sha256: f8823600cb85425e2815cfad82ea20fdaa538482ab74e7293d58b3f64a5aff6a
     config-opts:
       - -Ddefault_library=static
-      - CFLAGS=-fPIE
-      - CXXFLAGS=-fPIE
   - name: entrusted
     buildsystem: simple
     sources:
