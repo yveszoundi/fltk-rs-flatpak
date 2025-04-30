@@ -2,18 +2,27 @@
 
 [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml/badge.svg]]
 
-
 *NOTE*:
 Do whatever you want with this code, the license file in this repository is just for testing purposes with Flatpak.
 
-
 * What is this?
 
-This is a simple proof of concept for packaging [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] applications with [[https://flatpak.org/][Flatpak]].
+This is a simple proof of concept for packaging [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] applications with [[https://flatpak.org/][Flatpak]]. Both =Xorg= and =Wayland= are supported.
+
+[[./screenshots/screenshot.jpg]]
 
 * How was this tested?
-- I only tested the build aspect so far on GitHub actions, due to build times
-- On a reasonable computer, this should take ~30 mins to build the Flatpak
+I only built the =Flatpak= package on GitHub actions (due to build times). Please refer to the [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/.github/workflows/flatpak.yml][GitHub Actions workflow file]] if you'd rather build the =Flatpak= package locally.
+
+* Where is the Flatpak package?
+You can find the resulting =Flatpak= package in the [[https://github.com/yveszoundi/fltk-rs-flatpak/releases][releases page]].
+
+#+begin_src sh
+  flatpak --user install com.rimerosolutions.Entrusted.flatpak
+  flatpak run com.rimerosolutions.Entrusted
+#+end_src
+
+You can also run the application from your applications launcher or menu (=Gnome=, =KDE= and maybe others): search for =Entrusted=.
 
 * What was challenging?
 - [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] requires compilation of some C libraries, that need GCC static libraries (e.g., =libsupc++=)
