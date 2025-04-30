@@ -97,7 +97,6 @@ modules:
         CFLAGS: -fPIE -I/app/include/pango-1.0/
         CXXFLAGS: -fPIE -I/app/include/pango-1.0/
     build-commands:
-      - find / -type f -name "glib-object.h"
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
       - RUSTFLAGS="-L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
