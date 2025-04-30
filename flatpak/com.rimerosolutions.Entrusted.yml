@@ -56,6 +56,7 @@ modules:
     config-opts:
       - -Dxft=enabled
       - -Dfreetype=enabled
+      - -Dcairo=enabled
   - name: libsupc++
     buildsystem: autotools
     sources:
@@ -85,12 +86,12 @@ modules:
         CARGO_HOME: /run/build/entrusted/cargo
         XDG_CACHE_HOME: /run/build/entrusted/cache
         LC_ALL: C.utf8
-        CFLAGS: -fPIE
-        CXXFLAGS: -fPIE
+        CFLAGS: -fPIE -I/app/include/pango-1.0/pango/
+        CXXFLAGS: -fPIE -I/app/include/pango-1.0/pango/
     build-commands:
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
-      - RUSTFLAGS="-L /app/lib -L /app/lib64 -C link-arg=-fPIE" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
+      - RUSTFLAGS="-L /app/lib -L /app/lib64" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
       - install -Dm644 -t /app/share/metainfo/ flatpak/com.rimerosolutions.Entrusted.metainfo.xml
       - install -Dm644 -t /app/share/applications/ flatpak/com.rimerosolutions.Entrusted.desktop 
       - install -Dm755 -t /app/bin/ /run/build/entrusted/app/target/release/entrusted
