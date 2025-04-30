@@ -74,6 +74,14 @@ modules:
       - --with-gmp=/app 
       - CFLAGS=-fPIE
       - CXXFLAGS=-fPIE
+  - name: glib
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz
+        sha256: f8823600cb85425e2815cfad82ea20fdaa538482ab74e7293d58b3f64a5aff6a
+    config-opts:
+      - -Ddefault_library=shared
   - name: entrusted
     buildsystem: simple
     sources:
@@ -89,6 +97,7 @@ modules:
         CFLAGS: -fPIE -I/app/include/pango-1.0/
         CXXFLAGS: -fPIE -I/app/include/pango-1.0/
     build-commands:
+      - find / -type f -name "glib-object.h"
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
       - RUSTFLAGS="-L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
