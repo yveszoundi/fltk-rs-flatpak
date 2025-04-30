@@ -37,7 +37,7 @@ This is an example on Ubuntu, but that doesn't matter much.
   flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir flatpak/com.rimerosolutions.Entrusted.yml
 #+end_src
 
-** Generating cargo source for the offline build
+** Generating cargo sources for the offline build
 
 Get [[https://github.com/flatpak/flatpak-builder-tools][flatpak-builder-tools]] from GitHub (git clone first).
 
