@@ -18,9 +18,9 @@ jobs:
       run: |
         flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
         flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir flatpak/com.rimerosolutions.Entrusted.yml
-        mkdir ${{ github.workspace}/bundle
+        mkdir bundle
         flatpak build-bundle repo com.rimerosolutions.Entrusted.flatpak com.rimerosolutions.Entrusted --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
-        cp *.flatpak ${{ github.workspace }}/bundle
+        cp *.flatpak ./bundle/
     - name: upload-flatpak
       uses: actions/upload-artifact@v4
       with:
