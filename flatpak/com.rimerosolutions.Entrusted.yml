@@ -90,6 +90,12 @@ modules:
         sha256: 50f7d0a208367e606dbf6eecc5cfbecc01a47be6ee837ae7aff2787e24b09b45
     config-opts:
       - -Ddefault_library=static
+  - name: cairo
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://www.cairographics.org/releases/cairo-1.18.4.tar.xz
+        sha256: 445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb
   - name: entrusted
     buildsystem: simple
     sources:
@@ -104,10 +110,11 @@ modules:
         LC_ALL: C.utf8
         CFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/
         CXXFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/
+        RUSTFLAGS: -L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64//glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/
     build-commands:
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
-      - RUSTFLAGS="-L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64//glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/" cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
+      - cargo --offline build --manifest-path /run/build/entrusted/app/Cargo.toml --features fltk/use-wayland --release
       - install -Dm644 -t /app/share/metainfo/ flatpak/com.rimerosolutions.Entrusted.metainfo.xml
       - install -Dm644 -t /app/share/applications/ flatpak/com.rimerosolutions.Entrusted.desktop 
       - install -Dm755 -t /app/bin/ /run/build/entrusted/app/target/release/entrusted
