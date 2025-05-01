@@ -131,6 +131,12 @@ modules:
       - type: git
         url: https://gitlab.gnome.org/GNOME/sysprof.git
         branch: sysprof-48
+    build-options:
+      env:
+        PKG_CONFIG_PATH: "/app/lib/pkgconfig:/app/lib64/pkgconfig"
+        CFLAGS: -I/app/include/libdex-1 -I/app/include/libpanel-1
+        CXXFLAGS: -I/app/include/libdex-1 -I/app/include/libpanel-1
+        LD_LIBRARY_PATH: "/usr/lib/sdk/llvm20/lib:/app/lib64:/app/lib"
     config-opts:
       - -Dsysprofd=none
   - name: entrusted
