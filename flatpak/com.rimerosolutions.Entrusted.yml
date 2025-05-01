@@ -104,6 +104,27 @@ modules:
         sha256: 445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb
     config-opts:
       - -Dtests=disabled
+  - name: libpanel
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libpanel.git
+        branch: libpanel-1.8
+    config-opts:
+      - -Ddocs=disabled
+      - -Dintrospection=disabled
+      - -Dvapi=false
+  - name: libdex
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libdex.git
+        branch: libdex-0.10
+    config-opts:
+      - -Ddocs=false
+      - -Dexamples=false
+      - -Dtests=false      
+      - -Dsysprof=false      
   - name: sysprof
     buildsystem: meson
     sources:
