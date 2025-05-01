@@ -74,6 +74,12 @@ modules:
       - --with-gmp=/app 
       - CFLAGS=-fPIE
       - CXXFLAGS=-fPIE
+  - name: pcre
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.tar.gz
+        sha256: 0e138387df7835d7403b8351e2226c1377da804e0737db0e071b48f07c9d12ee
   - name: glib-object
     buildsystem: meson
     sources:
@@ -108,9 +114,9 @@ modules:
         CARGO_HOME: /run/build/entrusted/cargo
         XDG_CACHE_HOME: /run/build/entrusted/cache
         LC_ALL: C.utf8
-        CFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo
-        CXXFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo
-        RUSTFLAGS: -L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64//glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/ -C link-arg=-I/app/include/cairo/ -C link-arg=-lffi -C link-arg=-lgobject-2.0 -C link-arg=-lglib-2.0 -C link-arg=-lcairo
+        CFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo -lpcre2-10
+        CXXFLAGS: -fPIE -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64//glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo -lpcre2-10
+        RUSTFLAGS: -L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64//glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/ -C link-arg=-I/app/include/cairo/ -C link-arg=-lffi -C link-arg=-lgobject-2.0 -C link-arg=-lglib-2.0 -C link-arg=-lcairo -C link-arg=-lpcre2-10
     build-commands:
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
