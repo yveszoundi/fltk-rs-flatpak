@@ -82,6 +82,14 @@ modules:
         sha256: f8823600cb85425e2815cfad82ea20fdaa538482ab74e7293d58b3f64a5aff6a
     config-opts:
       - -Ddefault_library=static
+  - name: harfbuzz
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/harfbuzz/harfbuzz/releases/download/11.2.0/harfbuzz-11.2.0.tar.xz
+        sha256: 50f7d0a208367e606dbf6eecc5cfbecc01a47be6ee837ae7aff2787e24b09b45
+    config-opts:
+      - -Ddefault_library=static
   - name: entrusted
     buildsystem: simple
     sources:
