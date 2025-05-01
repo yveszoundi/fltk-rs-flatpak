@@ -104,6 +104,12 @@ modules:
         sha256: 445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb
     config-opts:
       - -Dtests=disabled
+  - name: sysprof
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/sysprof.git
+        branch: sysprof-48
   - name: entrusted
     buildsystem: simple
     sources:
