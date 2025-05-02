@@ -87,7 +87,7 @@ modules:
         url: https://download.gnome.org/sources/glib/2.84/glib-2.84.0.tar.xz
         sha256: f8823600cb85425e2815cfad82ea20fdaa538482ab74e7293d58b3f64a5aff6a
     config-opts:
-      - -Ddefault_library=static
+      - -Ddefault_library=shared
   - name: harfbuzz
     buildsystem: meson
     sources:
