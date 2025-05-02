@@ -114,6 +114,10 @@ modules:
       - -Ddocs=disabled
       - -Dintrospection=disabled
       - -Dvapi=false
+    build-options:
+      env:
+        - CFLAGS=-lstdc++
+        - CXXFLAGS=-ldstdc++
   - name: libdex
     buildsystem: meson
     sources:
@@ -153,7 +157,7 @@ modules:
         LC_ALL: C.utf8
         CFLAGS: -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64/glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo -lpcre2-8
         CXXFLAGS:  -I/app/include/pango-1.0/ -I/app/include/glib-2.0/ -I/app/lib64/glib-2.0/include/ -I/app/include/harfbuzz/ -I/app/include/cairo/ -lffi -lgobject-2.0 -lglib-2.0 -lcairo -lpcre2-8
-        RUSTFLAGS: -L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64/glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/ -C link-arg=-I/app/include/cairo/ -C link-arg=-lffi -C link-arg=-lgobject-2.0 -C link-arg=-lglib-2.0 -C link-arg=-lcairo -C link-arg=-lpcre2-8 -C link-arg=-lfltk 
+        RUSTFLAGS: -L /app/lib -L /app/lib64 -C link-arg=-I/app/include/pango-1.0/ -C link-arg=-I/app/include/glib-2.0/ -C link-arg=-I/app/lib64/glib-2.0/include/ -C link-arg=-I/app/include/harfbuzz/ -C link-arg=-I/app/include/cairo/ -C link-arg=-lffi -C link-arg=-lgobject-2.0 -C link-arg=-lglib-2.0 -C link-arg=-lcairo -C link-arg=-lpcre2-8 
     build-commands:
       - cargo --offline fetch --manifest-path /run/build/entrusted/app/Cargo.toml --verbose
       - source /usr/lib/sdk/llvm20/enable.sh
