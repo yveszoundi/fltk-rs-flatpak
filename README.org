@@ -13,7 +13,7 @@ Both =Xorg= and =Wayland= are supported.
 [[./screenshots/screenshot.jpg]]
 
 * How was this tested?
-I only built the =Flatpak= package on GitHub actions (due to build times). Please refer to the [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/.github/workflows/flatpak.yml][GitHub Actions workflow file]] if you'd rather build the =Flatpak= package locally.
+I only built the =Flatpak= package on GitHub actions (due to build times). Please refer to the [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/.github/workflows/flatpak.yml][GitHub Actions workflow file]].
 
 * Where is the Flatpak package?
 You can find the resulting =Flatpak= package in the [[https://github.com/yveszoundi/fltk-rs-flatpak/releases][releases page]].
@@ -84,7 +84,6 @@ Install the [[https://github.com/flathub-infra/flatpak-builder-lint][linter]] fi
 #+begin_src sh
   flatpak run --command=desktop-file-validate org.flatpak.Builder flatpak/com.rimerosolutions.Entrusted.desktop
 #+end_src
-
 
 * References
 
