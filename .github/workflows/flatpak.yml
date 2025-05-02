@@ -17,14 +17,4 @@ jobs:
         bundle: com.rimerosolutions.Entrusted.flatpak
         manifest-path: ${{ github.workspace }}/flatpak/com.rimerosolutions.Entrusted.yml
         cache-key: flatpak-builder-${{ github.sha }}
-    - name: copy-bundle
-      shell: bash
-      run: |
-        mkdir bundle
-        cp com.rimerosolutions.Entrusted.flatpak ./bundle/
-    - name: upload-flatpak
-      uses: actions/upload-artifact@v4
-      with:
-        name: entrusted-flatpak
-        path: ${{ github.workspace }}/bundle
 

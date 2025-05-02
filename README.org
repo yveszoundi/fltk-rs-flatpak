@@ -16,7 +16,7 @@ Both =Xorg= and =Wayland= are supported.
 I only built the =Flatpak= package on GitHub actions (due to build times). Please refer to the [[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/.github/workflows/flatpak.yml][GitHub Actions workflow file]].
 
 * Where is the Flatpak package?
-You can find the resulting =Flatpak= package in the [[https://github.com/yveszoundi/fltk-rs-flatpak/releases][releases page]] (hybrid build for =X11= and =Wayland=).
+You can find the resulting =Flatpak= package in the [[https://github.com/yveszoundi/fltk-rs-flatpak/releases][releases page]] (for =X11= and =Wayland=).
 
 #+begin_src sh
   flatpak --user install com.rimerosolutions.Entrusted.flatpak
