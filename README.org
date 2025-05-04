@@ -8,7 +8,7 @@ Do whatever you want with this code, the license file in this repository is just
 * What is this?
 
 This is a simple proof of concept for packaging [[https://fltk-rs.github.io/fltk-rs/][fltk-rs]] applications with [[https://flatpak.org/][Flatpak]].
-Both =Xorg= and =Wayland= are supported.
+Both =Xorg= and =Wayland= are supported: this is a hybrid build.
 
 [[./screenshots/screenshot.jpg]]
 
