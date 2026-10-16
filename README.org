@@ -1,6 +1,6 @@
 #+TITLE: Packaging an app built with fltk-rs
 
-[[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml/badge.svg]]
+[[https://github.com/yveszoundi/fltk-rs-flatpak/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/flatpak.yml][file:https://github.com/yveszoundi/fltk-rs-flatpak/actions/workflows/main.yml/badge.svg]]
 
 *NOTE*:
 Do whatever you want with this code, the license file in this repository is just for testing purposes with Flatpak.
